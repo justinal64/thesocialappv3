@@ -36,9 +36,6 @@ namespace thesocialappapiv3.Controllers
         [AllowAnonymous]
         public ActionResult Post([FromBody]LoginViewModel login, string id = "")
         {
-            // check for dbid
-            // if (login.dbid == null) return StatusCode(404, "Please enter a dbid");
-            // check if user exist first
             if(!_repository.DoesUserExist(login.dbid))
             {
                 _repository.InsertUser(login);
