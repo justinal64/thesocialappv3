@@ -9,16 +9,16 @@ using thesocialappapiv3.Models.PostModel;
 
 namespace thesocialappapiv3.Repository
 {
-    public class PostsRepository
+    public class LoginRepository
     {
         protected static IMongoClient _client;
         protected static IMongoDatabase _database;
         protected IMongoCollection<PostModel> _collection;
 
-        public PostsRepository()
+        public LoginRepository()
         {
             _client = new MongoClient();
-            _database = _client.GetDatabase("demoDB");
+            _database = _client.GetDatabase("login");
             _collection = _database.GetCollection<PostModel>("posts");
         }
 

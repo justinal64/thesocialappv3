@@ -43,7 +43,6 @@ namespace thesocialappapiv3.Controllers
             {
                 _repository.UpdatePost(id, postModel);
                 return StatusCode(200, "Record Updated");
-                
             }
         }
         
