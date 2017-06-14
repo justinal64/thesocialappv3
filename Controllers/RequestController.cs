@@ -33,6 +33,7 @@ namespace thesocialappapiv3.Controllers
         [HttpPost]
         public ActionResult Post([FromBody]PostModel postModel, string id = "")
         {
+            postModel.dbid = UUID();
             if(postModel.dbid == null) return StatusCode(404, "Please enter a dbid");
             if (id == "")
             {
@@ -60,6 +61,11 @@ namespace thesocialappapiv3.Controllers
         {
             if (id == "") return _repository.InsertPost(postModel);
             return _repository.UpdatePost(id, postModel);
+        }
+        
+        private string UUID() 
+        {
+            return System.Guid.NewGuid().ToString();    
         }
     }
 }

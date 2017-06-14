@@ -1,24 +1,21 @@
 db.posts.save({
     "Posts" : "Sed ut perspiciatis unde omnis iste natus error",
     "Company" : "World Outreach Church",
-    "Email" : "test@yahoo.com",
-    "Password": "P@ssword1",
-    "dbid": "faegfnjksbghksb"
+    "dbid": "faegfnjksbghksb",
+    "Username": "J Smooth"
 });
 
 db.posts.save({
     "Posts" : "Sed ut perspiciatis unde omnis iste natus error",
     "Company" : "World Outreach Church",
-    "Email" : "test1@yahoo.com",
-    "Password": "P@ssword1",
-    "dbid": "faegfnjwdwdwdksbghksb"
+    "dbid": "faegfnjwdwdwdksbghksb",
+    "Username": "K Smooth"
 });
 
 
 db.posts.save({
     "Posts" : "Sed ut perspiciatis unde omnis iste natus error",
     "Company" : "World Outreach Church",
-    "Email" : "test2@yahoo.com",
-    "Password": "P@ssword1",
-    "dbid": "faegfnjwdwdwdsdsddksbghksb"
+    "dbid": "faegfnjwdwdwdsdsddksbghksb",
+    "Username": "Z Smooth"
 });
