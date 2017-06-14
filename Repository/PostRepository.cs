@@ -45,7 +45,7 @@ namespace thesocialappapiv3.Repository
 
         public List<PostModel> Filter(string jsonQuery)
         {
-            //var queryDoc = new QueryDocument(BsonSerializer.Deserialize<BsonDocument>(jsonQuery));
+            // var queryDoc = new QueryDocument(BsonSerializer.Deserialize<BsonDocument>(jsonQuery));
             BsonDocument queryDoc = MongoDB.Bson.Serialization
                    .BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
 
