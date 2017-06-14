@@ -33,45 +33,25 @@ namespace thesocialappapiv3.Controllers
         
         // POST api/account
         [HttpPost]
-        [AllowAnonymous]
+        // [AllowAnonymous]
         public ActionResult Post([FromBody]LoginViewModel login, string id = "")
         {
-            if(!_repository.DoesUserExist(login.dbid))
+            if(!_repository.DoesUserExist(login.Username))
             {
+                login.dbid = UUID();
                 _repository.InsertUser(login);
                 return StatusCode(200, login); 
             }
             else 
             {
                 // _repository.UpdatePost(id, login);
-                return StatusCode(404, _repository.Get(login.dbid));
+                return StatusCode(200, _repository.Get(login.Username));
             }
         }
         
-        // PUT api/account
-        // [HttpPut]
-        // public PostModel Put([FromBody]PostModel postModel, string id = "")
-        // {
-        //     if (id == "") return _repository.InsertPost(postModel);
-        //     return _repository.UpdatePost(id, postModel);
-        // }
-        
-        // // Delete api/account
-        // [HttpDelete]
-        // public PostModel Delete([FromBody]PostModel postModel, string id = "")
-        // {
-        //     if (id == "") return _repository.InsertPost(postModel);
-        //     return _repository.UpdatePost(id, postModel);
-        // }
-        
-        // private List<PostModel> GetUser(string email)
-        // {
-        //     if (email == "")     
-        //     {
-        //         List<PostModel> data = _repository.SelectAll();
-        //         return data;   
-        //     }
-        //     return _repository.Filter(email);
-        // }
+        private string UUID() 
+        {
+            return System.Guid.NewGuid().ToString();    
+        }
     }
 }

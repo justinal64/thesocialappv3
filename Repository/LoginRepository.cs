@@ -56,18 +56,19 @@ namespace thesocialappapiv3.Repository
         //     return _collection.Find<PostModel>(queryDoc).ToList();
         // }
 
-        public bool DoesUserExist(string dbid) 
+        public bool DoesUserExist(string username) 
         {
-            var filter = Builders<LoginViewModel>.Filter.Eq(x => x.dbid, dbid);
+            var filter = Builders<LoginViewModel>.Filter.Eq(x => x.Username, username);
             var results =  this._collection.Find(filter).ToList();
             if(results.Count == 0) return false;
             else return true;
         }
 
-        public LoginViewModel Get(string dbid)
+        public LoginViewModel Get(string username)
         {          
-            var filter = Builders<LoginViewModel>.Filter.Eq(x => x.dbid, dbid);  
-            return this._collection.Find(filter).FirstAsync().Result;
+            var filter = Builders<LoginViewModel>.Filter.Eq(x => x.Username, username);  
+            var test = this._collection.Find(filter).FirstAsync().Result;
+            return test;
         }
         // public PostModel UpdatePost(string id, PostModel postmodel)
         // {
