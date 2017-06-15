@@ -66,10 +66,10 @@ namespace thesocialappapiv3.Controllers
         
         // Delete api/request
         [HttpDelete]
-        public PostModel Delete([FromBody]PostModel postModel, string id = "")
+        [Route("{dbid}")]
+        public void Delete(string dbid)
         {
-            if (id == "") return _repository.InsertPost(postModel);
-            return _repository.UpdatePost(id, postModel);
+            _repository.DeletePost(dbid);
         }
         
         private string UUID() 
