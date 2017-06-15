@@ -57,11 +57,12 @@ namespace thesocialappapiv3.Controllers
         
         // PUT api/request
         [HttpPut]
-        public PostModel Put([FromBody]PostModel postModel)
+        public ActionResult Put([FromBody]PostModel postModel)
         {
+            // var updatedPost = _repository.UpdateLikes(postModel);
+            _repository.UpdateLikes(postModel);
             
-            if (postModel.dbid == "") return _repository.InsertPost(postModel);
-            return _repository.UpdatePost(postModel.dbid, postModel);
+            return StatusCode(200);
         }
         
         // Delete api/request
