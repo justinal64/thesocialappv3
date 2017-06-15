@@ -77,5 +77,10 @@ namespace thesocialappapiv3.Repository
             var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);  
             return this._collection.Find(filter).ToList();
         }
+        
+        public void DeletePost(string dbid) 
+        {
+            _collection.DeleteOne(a => a.dbid == dbid);
+        }
     }
 }
