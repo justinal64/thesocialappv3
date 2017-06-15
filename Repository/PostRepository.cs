@@ -52,18 +52,30 @@ namespace thesocialappapiv3.Repository
             return _collection.Find<PostModel>(queryDoc).ToList();
         }
 
+        public List<PostModel> GetAll(string username)
+        {
+            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);  
+            return this._collection.Find(filter).ToList();
+        }
+
         public PostModel Get(string id)
         {
             // return this._collection.Find(new BsonDocument { { "id", new ObjectId(id) } }).FirstAsync().Result;
             return this._collection.Find(new BsonDocument { { "_id", new ObjectId(id) } }).FirstAsync().Result;
         }
-        public PostModel UpdatePost(string id, PostModel postmodel)
+        public PostModel UpdatePost(string dbid, PostModel postmodel)
         {
-            postmodel._id = new ObjectId(id);
+            // postmodel._id = new ObjectId(dbid);
 
-            var filter = Builders<PostModel>.Filter.Eq(s => s._id, postmodel._id);
+            var filter = Builders<PostModel>.Filter.Eq(s => s.dbid, postmodel.dbid);
             this._collection.ReplaceOneAsync(filter, postmodel);
-            return this.Get(id);
+            return this.Get(dbid);
+        }
+        
+        public List<PostModel> PostByUsername(string username) 
+        {
+            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);  
+            return this._collection.Find(filter).ToList();
         }
     }
 }

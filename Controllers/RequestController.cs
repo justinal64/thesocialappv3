@@ -18,9 +18,17 @@ namespace thesocialappapiv3.Controllers
 
         // GET api/request
         [HttpGet]
-        public List<PostModel> Get(string jsonQuery = "")
+        [Route("{username}")]
+        public List<PostModel> GetByUsername(string username)
         {
-            // if (jsonQuery == "") return  _repository.SelectAll();
+            return _repository.PostByUsername(username);
+        }
+        
+        // GET api/request/getall
+        [HttpGet]
+        [Route("getall")]
+        public List<PostModel> GetAll(string jsonQuery = "")
+        {
             if (jsonQuery == "")     
             {
                 List<PostModel> data = _repository.SelectAll();
@@ -49,10 +57,11 @@ namespace thesocialappapiv3.Controllers
         
         // PUT api/request
         [HttpPut]
-        public PostModel Put([FromBody]PostModel postModel, string id = "")
+        public PostModel Put([FromBody]PostModel postModel)
         {
-            if (id == "") return _repository.InsertPost(postModel);
-            return _repository.UpdatePost(id, postModel);
+            
+            if (postModel.dbid == "") return _repository.InsertPost(postModel);
+            return _repository.UpdatePost(postModel.dbid, postModel);
         }
         
         // Delete api/request
