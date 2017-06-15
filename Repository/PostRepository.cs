@@ -65,8 +65,6 @@ namespace thesocialappapiv3.Repository
         }
         public PostModel UpdatePost(string dbid, PostModel postmodel)
         {
-            // postmodel._id = new ObjectId(dbid);
-
             var filter = Builders<PostModel>.Filter.Eq(s => s.dbid, postmodel.dbid);
             this._collection.ReplaceOneAsync(filter, postmodel);
             return this.Get(dbid);
@@ -81,6 +79,13 @@ namespace thesocialappapiv3.Repository
         public void DeletePost(string dbid) 
         {
             _collection.DeleteOne(a => a.dbid == dbid);
+        }
+        
+        public void UpdateLikes(PostModel postmodel)
+        {
+            var filter = Builders<PostModel>.Filter.Eq(s => s.dbid, postmodel.dbid);
+            var update = Builders<PostModel>.Update.Set(s => s.Likes, postmodel.Likes);
+            var test = this._collection.UpdateOneAsync(filter, update);
         }
     }
 }
