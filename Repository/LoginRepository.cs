@@ -23,13 +23,13 @@ namespace thesocialappapiv3.Repository
             _collection = _database.GetCollection<LoginViewModel>("login");
         }
 
-        public LoginViewModel InsertUser(LoginViewModel user) 
+        public LoginViewModel InsertUser(LoginViewModel user)
         {
             this._collection.InsertOneAsync(user);
-            var newUser = this.Get(user._id.ToString());
+            var newUser = this.Get(user.Username);
             return newUser;
             // return this.Get(user._id.ToString());
-            
+
         }
 
         // public List<PostModel> SelectAll()
@@ -56,17 +56,17 @@ namespace thesocialappapiv3.Repository
         //     return _collection.Find<PostModel>(queryDoc).ToList();
         // }
 
-        public bool DoesUserExist(string username) 
+        public bool DoesUserExist(string username)
         {
             var filter = Builders<LoginViewModel>.Filter.Eq(x => x.Username, username);
-            var results =  this._collection.Find(filter).ToList();
-            if(results.Count == 0) return false;
+            var results = this._collection.Find(filter).ToList();
+            if (results.Count == 0) return false;
             else return true;
         }
 
         public LoginViewModel Get(string username)
-        {          
-            var filter = Builders<LoginViewModel>.Filter.Eq(x => x.Username, username);  
+        {
+            var filter = Builders<LoginViewModel>.Filter.Eq(x => x.Username, username);
             var test = this._collection.Find(filter).FirstAsync().Result;
             return test;
         }
