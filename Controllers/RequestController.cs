@@ -21,8 +21,8 @@ namespace thesocialappapiv3.Controllers
         [Route("{username}")]
         public List<PostModel> GetByUsername(string username)
         {
-            var test = _repository.PostByUsername(username);
-            return test;
+            var postByUsername = _repository.PostByUsername(username);
+            return postByUsername;
         }
 
         // GET api/request/getall
@@ -43,7 +43,6 @@ namespace thesocialappapiv3.Controllers
         public ActionResult Post([FromBody]PostModel postModel, string id = "")
         {
             postModel.dbid = UUID();
-            if (postModel.dbid == null) return StatusCode(404, "Please enter a dbid");
             if (id == "")
             {
                 _repository.InsertPost(postModel);
