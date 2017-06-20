@@ -30,7 +30,6 @@ namespace thesocialappapiv3.Repository
 
         public List<PostModel> SelectAll()
         {
-            //var query =  this._collection.Find(_ => true)?.ToList();
             try
             {
                 var query = this._collection.Find(_ => true).ToList();
@@ -46,7 +45,6 @@ namespace thesocialappapiv3.Repository
 
         public List<PostModel> Filter(string jsonQuery)
         {
-            // var queryDoc = new QueryDocument(BsonSerializer.Deserialize<BsonDocument>(jsonQuery));
             BsonDocument queryDoc = MongoDB.Bson.Serialization
                    .BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
 
@@ -61,7 +59,6 @@ namespace thesocialappapiv3.Repository
 
         public PostModel Get(string id)
         {
-            // return this._collection.Find(new BsonDocument { { "id", new ObjectId(id) } }).FirstAsync().Result;
             return this._collection.Find(new BsonDocument { { "_id", new ObjectId(id) } }).FirstAsync().Result;
         }
         public PostModel UpdatePost(string dbid, PostModel postmodel)
