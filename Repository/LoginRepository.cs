@@ -67,8 +67,8 @@ namespace thesocialappapiv3.Repository
         public LoginViewModel Get(string username)
         {
             var filter = Builders<LoginViewModel>.Filter.Eq(x => x.Username, username);
-            var test = this._collection.Find(filter).FirstAsync().Result;
-            return test;
+            var singleUser = this._collection.Find(filter).FirstAsync().Result;
+            return singleUser;
         }
         // public PostModel UpdatePost(string id, PostModel postmodel)
         // {

@@ -36,7 +36,8 @@ namespace thesocialappapiv3.Repository
                 var query = this._collection.Find(_ => true).ToList();
                 return query;
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 Debug.WriteLine(ex.Message);
             }
 
@@ -54,7 +55,7 @@ namespace thesocialappapiv3.Repository
 
         public List<PostModel> GetAll(string username)
         {
-            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);  
+            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);
             return this._collection.Find(filter).ToList();
         }
 
@@ -69,23 +70,23 @@ namespace thesocialappapiv3.Repository
             this._collection.ReplaceOneAsync(filter, postmodel);
             return this.Get(dbid);
         }
-        
-        public List<PostModel> PostByUsername(string username) 
+
+        public List<PostModel> PostByUsername(string username)
         {
-            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);  
+            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);
             return this._collection.Find(filter).ToList();
         }
-        
-        public void DeletePost(string dbid) 
+
+        public void DeletePost(string dbid)
         {
             _collection.DeleteOne(a => a.dbid == dbid);
         }
-        
+
         public void UpdateLikes(PostModel postmodel)
         {
             var filter = Builders<PostModel>.Filter.Eq(s => s.dbid, postmodel.dbid);
             var update = Builders<PostModel>.Update.Set(s => s.Likes, postmodel.Likes);
-            var test = this._collection.UpdateOneAsync(filter, update);
+            this._collection.UpdateOneAsync(filter, update);
         }
     }
 }

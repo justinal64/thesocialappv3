@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using thesocialappapiv3.Models.PostModel;
 using thesocialappapiv3.Repository;
+using thesocialappapiv3.Models.NotesModel;
 
 namespace thesocialappapiv3.Controllers
 {
@@ -19,51 +20,27 @@ namespace thesocialappapiv3.Controllers
         // GET api/notes
         [HttpGet]
         [Route("{username}")]
-        public List<PostModel> GetByUsername(string username)
+        public List<NotesModel> GetByUsername(string username)
         {
-            var test = _repository.PostByUsername(username);
-            return test;
+            var notesByUsername = _repository.PostByUsername(username);
+            return notesByUsername;
         }
 
-        // GET api/notes/getall
-        [HttpGet]
-        [Route("getall")]
-        public List<PostModel> GetAll(string jsonQuery = "")
-        {
-            if (jsonQuery == "")
-            {
-                List<PostModel> data = _repository.SelectAll();
-                return data;
-            }
-            return _repository.Filter(jsonQuery);
-        }
-
-        // POST api/notes
+        //POST api/notes
         [HttpPost]
-        public ActionResult Post([FromBody]PostModel postModel, string id = "")
+        public ActionResult Post([FromBody]NotesModel notesModel, string id = "")
         {
-            postModel.dbid = UUID();
-            if (postModel.dbid == null) return StatusCode(404, "Please enter a dbid");
+            notesModel.dbid = UUID();
             if (id == "")
             {
-                _repository.InsertPost(postModel);
+                _repository.InsertPost(notesModel);
                 return StatusCode(200);
             }
             else
             {
-                _repository.UpdatePost(id, postModel);
+                _repository.UpdatePost(id, notesModel);
                 return StatusCode(200, "Record Updated");
             }
-        }
-
-        // PUT api/notes
-        [HttpPut]
-        public ActionResult Put([FromBody]PostModel postModel)
-        {
-            // var updatedPost = _repository.UpdateLikes(postModel);
-            _repository.UpdateLikes(postModel);
-
-            return StatusCode(200);
         }
 
         // Delete api/notes

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace thesocialappapiv3.Models.PostModel
+namespace thesocialappapiv3.Models.NotesModel
 {
     public class NotesModel
     {

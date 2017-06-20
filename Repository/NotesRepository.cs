@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization;
 using System.Threading.Tasks;
 using System;
 using System.Diagnostics;
-using thesocialappapiv3.Models.PostModel;
+using thesocialappapiv3.Models.NotesModel;
 
 namespace thesocialappapiv3.Repository
 {
@@ -13,22 +13,22 @@ namespace thesocialappapiv3.Repository
     {
         protected static IMongoClient _client;
         protected static IMongoDatabase _database;
-        protected IMongoCollection<PostModel> _collection;
+        protected IMongoCollection<NotesModel> _collection;
 
         public NotesRepository()
         {
             _client = new MongoClient();
             _database = _client.GetDatabase("demoDB");
-            _collection = _database.GetCollection<PostModel>("posts");
+            _collection = _database.GetCollection<NotesModel>("notes");
         }
 
-        public PostModel InsertPost(PostModel contact)
+        public NotesModel InsertPost(NotesModel note)
         {
-            this._collection.InsertOneAsync(contact);
-            return this.Get(contact._id.ToString());
+            this._collection.InsertOneAsync(note);
+            return this.Get(note.dbid);
         }
 
-        public List<PostModel> SelectAll()
+        public List<NotesModel> SelectAll()
         {
             //var query =  this._collection.Find(_ => true)?.ToList();
             try
@@ -41,52 +41,48 @@ namespace thesocialappapiv3.Repository
                 Debug.WriteLine(ex.Message);
             }
 
-            return new List<PostModel>();
+            return new List<NotesModel>();
         }
 
-        public List<PostModel> Filter(string jsonQuery)
+        public List<NotesModel> Filter(string jsonQuery)
         {
             // var queryDoc = new QueryDocument(BsonSerializer.Deserialize<BsonDocument>(jsonQuery));
             BsonDocument queryDoc = MongoDB.Bson.Serialization
                    .BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
 
-            return _collection.Find<PostModel>(queryDoc).ToList();
+            return _collection.Find<NotesModel>(queryDoc).ToList();
         }
 
-        public List<PostModel> GetAll(string username)
+        public List<NotesModel> GetAll(string username)
         {
-            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);
+            var filter = Builders<NotesModel>.Filter.Eq(x => x.Username, username);
             return this._collection.Find(filter).ToList();
         }
 
-        public PostModel Get(string id)
+        public NotesModel Get(string dbid)
         {
             // return this._collection.Find(new BsonDocument { { "id", new ObjectId(id) } }).FirstAsync().Result;
-            return this._collection.Find(new BsonDocument { { "_id", new ObjectId(id) } }).FirstAsync().Result;
+
+            var filter = Builders<NotesModel>.Filter.Eq(x => x.dbid, dbid);
+            var singleNote = this._collection.Find(filter).FirstAsync().Result;
+            return singleNote;
         }
-        public PostModel UpdatePost(string dbid, PostModel postmodel)
+        public NotesModel UpdatePost(string dbid, NotesModel NotesModel)
         {
-            var filter = Builders<PostModel>.Filter.Eq(s => s.dbid, postmodel.dbid);
-            this._collection.ReplaceOneAsync(filter, postmodel);
+            var filter = Builders<NotesModel>.Filter.Eq(s => s.dbid, NotesModel.dbid);
+            this._collection.ReplaceOneAsync(filter, NotesModel);
             return this.Get(dbid);
         }
 
-        public List<PostModel> PostByUsername(string username)
+        public List<NotesModel> PostByUsername(string username)
         {
-            var filter = Builders<PostModel>.Filter.Eq(x => x.Username, username);
+            var filter = Builders<NotesModel>.Filter.Eq(x => x.Username, username);
             return this._collection.Find(filter).ToList();
         }
 
         public void DeletePost(string dbid)
         {
             _collection.DeleteOne(a => a.dbid == dbid);
-        }
-
-        public void UpdateLikes(PostModel postmodel)
-        {
-            var filter = Builders<PostModel>.Filter.Eq(s => s.dbid, postmodel.dbid);
-            var update = Builders<PostModel>.Update.Set(s => s.Likes, postmodel.Likes);
-            var test = this._collection.UpdateOneAsync(filter, update);
         }
     }
 }
