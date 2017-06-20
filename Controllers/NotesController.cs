@@ -31,16 +31,9 @@ namespace thesocialappapiv3.Controllers
         public ActionResult Post([FromBody]NotesModel notesModel, string id = "")
         {
             notesModel.dbid = UUID();
-            if (id == "")
-            {
-                _repository.InsertPost(notesModel);
-                return StatusCode(200);
-            }
-            else
-            {
-                _repository.UpdatePost(id, notesModel);
-                return StatusCode(200, "Record Updated");
-            }
+            _repository.InsertPost(notesModel);
+            return StatusCode(200);
+
         }
 
         // Delete api/notes

@@ -28,33 +28,8 @@ namespace thesocialappapiv3.Repository
             this._collection.InsertOneAsync(user);
             var newUser = this.Get(user.Username);
             return newUser;
-            // return this.Get(user._id.ToString());
 
         }
-
-        // public List<PostModel> SelectAll()
-        // {
-        //     //var query =  this._collection.Find(_ => true)?.ToList();
-        //     try
-        //     {
-        //         var query = this._collection.Find(_ => true).ToList();
-        //         return query;
-        //     }
-        //     catch (Exception ex) {
-        //         Debug.WriteLine(ex.Message);
-        //     }
-
-        //     return new List<PostModel>();
-        // }
-
-        // public List<PostModel> Filter(string jsonQuery)
-        // {
-        //     // var queryDoc = new QueryDocument(BsonSerializer.Deserialize<BsonDocument>(jsonQuery));
-        //     BsonDocument queryDoc = MongoDB.Bson.Serialization
-        //            .BsonSerializer.Deserialize<BsonDocument>(jsonQuery);
-
-        //     return _collection.Find<PostModel>(queryDoc).ToList();
-        // }
 
         public bool DoesUserExist(string username)
         {
@@ -70,13 +45,5 @@ namespace thesocialappapiv3.Repository
             var singleUser = this._collection.Find(filter).FirstAsync().Result;
             return singleUser;
         }
-        // public PostModel UpdatePost(string id, PostModel postmodel)
-        // {
-        //     postmodel._id = new ObjectId(id);
-
-        //     var filter = Builders<PostModel>.Filter.Eq(s => s._id, postmodel._id);
-        //     this._collection.ReplaceOneAsync(filter, postmodel);
-        //     return this.Get(id);
-        // }
     }
 }
