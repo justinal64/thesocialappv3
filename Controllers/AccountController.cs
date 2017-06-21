@@ -20,7 +20,6 @@ namespace thesocialappapiv3.Controllers
 
         // POST api/account
         [HttpPost]
-        // [AllowAnonymous]
         public ActionResult Post([FromBody]LoginViewModel login, string id = "")
         {
             if (!_repository.DoesUserExist(login.Username))

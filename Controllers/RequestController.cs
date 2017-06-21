@@ -59,7 +59,6 @@ namespace thesocialappapiv3.Controllers
         [HttpPut]
         public ActionResult Put([FromBody]PostModel postModel)
         {
-            // var updatedPost = _repository.UpdateLikes(postModel);
             _repository.UpdateLikes(postModel);
 
             return StatusCode(200);
