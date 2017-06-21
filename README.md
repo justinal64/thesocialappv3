@@ -20,20 +20,25 @@ Once you are in the proper directory type
 npm install
 ```
 to install all the project dependencies.
-next type 
+<br />
+Next type 
 ```
 code . 
 ```
 in your terminal to open the project in VS Code.
+<br />
 I recommend using VS Code to run this project, but we can argue over the best IDE another time ;). 
 
 ### Prerequisites
+#### MongoDB
+Before you can run this project you need to have MongoDB install and running. To install and configure MongoDB please following [this](https://docs.mongodb.com/manual/installation/#tutorials) tutorial.
 
-What things you need to install the software and how to install them
+Once you have MongoDB up and running in a terminal cd into the project directory and run the following command
+```
+mongo demoDB ./requestdata.js
+```
+This will put some basic user data in your database, so you have something to query. 
 
-```
-Give examples
-```
 
 ### Installing
 
