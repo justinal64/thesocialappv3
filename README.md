@@ -39,6 +39,14 @@ mongo demoDB ./requestdata.js
 ```
 This will put some basic user data in your database, so you have something to query. 
 
+### Not Required by Highly Recommended
+
+#### Postman
+Postman is a tool used to query data without a frontend application. To install Postman please following [this](https://www.getpostman.com/docs/postman/launching_postman/installation_and_updates) tutorial. I will be using Postman below to show you how to put/post/get/delete data from the application. 
+
+
+#### MongoDB Compass
+MongoDB Compass is a tool used to look at data that is being stored in a MongoDB. You don;t need it for this project, but if you do need to see what data in inside your MongoDb it is a great tool. To install a free version please go [here](https://www.mongodb.com/products/compass). 
 
 ### Installing
 
