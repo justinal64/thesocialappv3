@@ -57,14 +57,20 @@ Now that you have installed all the Prerequisites it's time to see if it all wor
 If the port is different from 5000 please use the port listed on your screen. For my examples I will be using 5000. 
 
 Open postman and configure it to look like the screenshot below.  
+
 ![Postman Get Request](./img/screenshots/postmanget.png)
+
 <br />
+
 If everything is working correctly you should see results like this. 
+
 <br />
+
 ![Postman GetAll Results](./img/screenshots/Postmangetallresults.png)
 
 
 ## Built With
+
 * [Asp.Net Core](https://docs.microsoft.com/en-us/aspnet/core/) - The web framework used
 * [MongoDB](https://www.mongodb.com/) - Database Used
 
