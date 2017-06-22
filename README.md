@@ -63,7 +63,6 @@ Open postman and configure it to look like the screenshot below.
 <br />
 
 If everything is working correctly you should see results like this. 
-
 <br />
 
 ![Postman GetAll Results](./img/screenshots/Postmangetallresults.png)
