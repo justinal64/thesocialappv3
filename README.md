@@ -70,7 +70,6 @@ If everything is working correctly you should see results like this.
 
 ## Author
 
-https://github.com/justinal64
 * [Justinal64](https://github.com/justinal64) - Justinal64
 
 ## License
