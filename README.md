@@ -51,7 +51,9 @@ MongoDB Compass is a tool used to look at data that is being stored in a MongoDB
 ### Installing
 
 Now that you have installed all the Prerequisites it's time to see if it all worked. Open your project in VS Code and either click Ctrl+ F5 or Debug->Start Debugging. This will start your server. After a few seconds a blank webpage should appear in your browser like this. 
+<br />
 ![Localhost](./img/screenshots/localhost.png)
+<br />
 If the port is different from 5000 please use the port listed on your screen. For my examples I will be using 5000. 
 
 Open postman and setup postman like this screenshot. 
